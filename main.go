@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"log"
+
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
 
 type Person struct {
-	Name string
+	Name  string
 	Phone string
 }
 
@@ -22,9 +23,9 @@ func main() {
 	//Optional. Switch the session to a monotonic behavior.
 	session.SetMode(mgo.Monotonic, true)
 
-	c := session.DB("test").C("pepole")
+	c := session.DB("bucket0001").C("examobj0001")
 	err = c.Insert(&Person{"Ale", "+86 10 8000 8000"},
-		       &Person{"Cla", "+86 10 6000 6000"})
+		&Person{"Cla", "+86 10 6000 6000"})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,4 +37,4 @@ func main() {
 	}
 
 	fmt.Println("Phone: ", result.Phone)
-} 
+}
